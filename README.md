@@ -227,12 +227,25 @@ C:\Users\<You>\
 
 ---
 
-## 🧾 Quick Install
+## 🧾 Quick Install — Heath's Ultimate One-Host AI Stack
 ```powershell
-git clone https://github.com/KFZZINGER101/Heath-s-Ultimate-One-Host-AI-Stack-Installer.git
-cd Heath-s-Ultimate-One-Host-AI-Stack-Installer
-Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
-.\Heath_AI_Installer.ps1
+cd "$env:USERPROFILE\Desktop"
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+
+# Force UTF-8 clean download from GitHub
+$installerUrl = "https://raw.githubusercontent.com/KFZZINGER101/-Heath-s-Ultimate-One-Host-AI-Stack-Installer-/main/Heath_AI_Installer_GUI.ps1"
+$installerFile = "Heath_AI_Installer_GUI.ps1"
+Invoke-WebRequest -Uri $installerUrl -OutFile $installerFile -UseBasicParsing
+(Get-Content $installerFile -Raw -Encoding UTF8) | Set-Content $installerFile -Encoding UTF8
+
+# Run the installer
+powershell.exe -ExecutionPolicy Bypass -File ".\Heath_AI_Installer_GUI.ps1"
+
+# Download and open the README on Desktop
+$readmeUrl = "https://raw.githubusercontent.com/KFZZINGER101/-Heath-s-Ultimate-One-Host-AI-Stack-Installer-/main/README.md"
+$readmePath = "$env:USERPROFILE\Desktop\Heath_AI_Installer_README.md"
+Invoke-WebRequest -Uri $readmeUrl -OutFile $readmePath -UseBasicParsing
+Start-Process $readmePath
 
 ```
 
